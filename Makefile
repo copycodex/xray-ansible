@@ -1,7 +1,7 @@
 .PHONY: all init init-close-22 traefik xray xray-add-client ping-init ping export-clients
 
 all:
-	ansible-playbook -i $(ANSIBLE_INVENTORY) site.yml
+	ansible-playbook -i $(ANSIBLE_INVENTORY)  playbooks/site.yml
 
 # run initial server setup
 init:
