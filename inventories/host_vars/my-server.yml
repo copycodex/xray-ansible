@@ -1,0 +1,1 @@
+ansible_host: "{{ lookup('env','SSH_HOST') | default('YOUR_SERVER_IP') }}"

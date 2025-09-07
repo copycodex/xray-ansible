@@ -1,0 +1,6 @@
+- name: Deploy Traefik reverse proxy
+  hosts: app
+  gather_facts: yes
+  roles:
+    - role: traefik
+      tags: [traefik]

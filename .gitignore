@@ -1,0 +1,19 @@
+# Ansible secrets
+.vault_pass.txt
+*.vault.yml
+
+# Python cache
+__pycache__/
+*.pyc
+
+# dotenv files with real secrets
+.env
+
+# Editor/IDE stuff
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+playbooks/exports

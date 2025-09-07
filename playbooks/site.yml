@@ -1,0 +1,43 @@
+- name: Bootstrap server (root + password)
+  hosts: bootstrap
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: init
+      tags: [init]
+
+  tasks:
+    # Wait for new SSH port to be ready before next plays
+    - name: Wait for new SSH port to open
+      wait_for:
+        host: "{{ hostvars[inventory_hostname].ansible_host | default(inventory_hostname) }}"
+        port: "{{ ssh_port }}"
+        timeout: 300
+        state: started
+
+    # Register new connection vars via dynamic inventory
+    - name: Register post-bootstrap host in 'app' group with new SSH settings
+      add_host:
+        name: "{{ inventory_hostname }}-app"
+        groups: app
+        ansible_host: "{{ hostvars[inventory_hostname].ansible_host | default(inventory_hostname) }}"
+        ansible_port: "{{ ssh_port }}"
+        ansible_user: "{{ user }}"
+        ansible_ssh_private_key_file: "{{ lookup('env','SSH_KEY') }}"
+        ansible_become: true
+        ansible_become_method: sudo
+        ansible_become_password: "{{ lookup('env','BECOME_PASSWORD') | default(omit) }}"
+
+- name: Deploy Traefik reverse proxy (post-bootstrap)
+  hosts: app
+  gather_facts: yes
+  roles:
+    - role: traefik
+      tags: [traefik]
+
+- name: Deploy Xray behind Traefik (post-bootstrap)
+  hosts: app
+  gather_facts: yes
+  roles:
+    - role: xray
+      tags: [xray]

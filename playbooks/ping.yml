@@ -1,0 +1,6 @@
+- name: Ping hardened host (copycodex + key)
+  hosts: app
+  gather_facts: no
+  tasks:
+    - name: Ping as copycodex
+      ping:
