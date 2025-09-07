@@ -11,7 +11,6 @@ init:
 init-close-22:
 	ansible-playbook -i $(ANSIBLE_INVENTORY) playbooks/init.yml -e close_ssh_22=true
 
-
 # deploy traefik
 traefik:
 	ansible-playbook -i $(ANSIBLE_INVENTORY) playbooks/traefik.yml
