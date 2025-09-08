@@ -67,7 +67,7 @@ make xray-add-client NAME=copycodex
 ## 7. Выгружаем все конфиги (опционально - после создания в консоле появляется ссылка)
 
 ```bash
-make xray-add-clien NAME=copycodex
+make export-clients
 ```
 
 ## 8. Добавляем конфиг в XRAY клиент. 
