@@ -1,8 +1,5 @@
 .PHONY: all init init-close-22 traefik xray xray-add-client ping-init ping export-clients
 
-all:
-	ansible-playbook -i $(ANSIBLE_INVENTORY)  playbooks/site.yml
-
 # run initial server setup
 init:
 	ansible-playbook -i $(ANSIBLE_INVENTORY) playbooks/init.yml
@@ -10,6 +7,9 @@ init:
 # run initial server setup and close port 22 after switching to new port
 init-close-22:
 	ansible-playbook -i $(ANSIBLE_INVENTORY) playbooks/init.yml -e close_ssh_22=true
+
+stack:
+	ansible-playbook -i $(ANSIBLE_INVENTORY)  playbooks/stack.yml
 
 # deploy traefik
 traefik:
