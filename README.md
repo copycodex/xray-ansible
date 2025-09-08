@@ -61,7 +61,7 @@ make stack
 ## 6. Добавляем пользователя
 
 ```bash
-make xray-add-clien NAME=copycodex
+make xray-add-client NAME=copycodex
 ```
 
 ## 7. Выгружаем все конфиги (опционально - после создания в консоле появляется ссылка)
